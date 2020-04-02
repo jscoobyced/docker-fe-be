@@ -1,9 +1,7 @@
 const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const WebpackMd5Hash = require('webpack-md5-hash');
-
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const dist = path.join(__dirname, 'dist');
 
@@ -41,32 +39,50 @@ module.exports = (env, argv) => {
                 test: /\.tsx?$/,
                 exclude: /node_modules/,
                 loader: 'babel-loader',
-            }],
+            },
+            {
+                test: /\.scss$/,
+                use: ['style-loader', MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader', 'sass-loader']
+            },
+            {
+                test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                        output: 'fonts/'
+                    }
+                }
+            },
+            {
+                test: /\.(gif|png|jpe?g|svg|ico)$/i,
+                use: {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]',
+                    },
+                },
+            }
+            ],
         },
         plugins: [
-            new CleanWebpackPlugin(),
             new CopyWebpackPlugin([{
                 from: './public'
-            },]),
-            new WebpackMd5Hash(),
+            }]),
+            new MiniCssExtractPlugin({
+                filename: 'style.[contenthash].css',
+            }),
+            new HtmlWebpackPlugin({
+                inject: true,
+            })
         ]
     };
 
     if (argv.mode === 'development') {
         config.devtool = 'source-map';
-        config.plugins.push(
-            new HtmlWebpackPlugin({
-                inject: true,
-            })
-        );
     }
 
     if (argv.mode === 'production') {
-        config.plugins.push(
-            new HtmlWebpackPlugin({
-                inject: true,
-            })
-        );
     }
 
     return config;

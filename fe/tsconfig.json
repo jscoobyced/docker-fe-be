@@ -4,6 +4,7 @@
         "module": "commonjs",
         "declaration": false,
         "noLib": false,
+        "jsx": "react",
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "sourceMap": true,
