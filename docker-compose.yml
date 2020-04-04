@@ -2,15 +2,15 @@ version: '3'
 services:
   jscfe:
     build:
-      context: .
-      dockerfile: Dockerfile-fe
+      context: ./fe
+      dockerfile: Dockerfile
     image: jscdroiddev/jscfe
     ports:
       - "80:80"
   jscbe:
     build:
-      context: .
-      dockerfile: Dockerfile-be
+      context: ./be
+      dockerfile: Dockerfile
     image: jscdroiddev/jscbe
     ports:
       - "8080:8080"

@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --fix src/**/*.{ts,tsx}",
+    "start": "webpack-dev-server --mode development --open",
     "test": "eslint --fix src/**/*.{ts,tsx} && jest",
     "test:coverage": "eslint --fix src/**/*.{ts,tsx} && jest --coverage",
-    "dev": "webpack --mode development",
     "build": "webpack --mode production",
-    "start": "cd dist && node main.js"
+    "dist": "yarn build && 7z a ../jscfebe.zip dist"
   },
   "author": "Cedric Rochefolle",
   "license": "MIT",
@@ -58,6 +58,7 @@
     "ts-jest": "^25.3.0",
     "typescript": "^3.8.3",
     "webpack": "^4.42.1",
-    "webpack-cli": "^3.3.11"
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
   }
 }

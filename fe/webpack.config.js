@@ -2,6 +2,7 @@ const path = require('path');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const dist = path.join(__dirname, 'dist');
 
@@ -66,6 +67,7 @@ module.exports = (env, argv) => {
             ],
         },
         plugins: [
+            new CleanWebpackPlugin(),
             new CopyWebpackPlugin([{
                 from: './public'
             }]),
@@ -80,6 +82,14 @@ module.exports = (env, argv) => {
 
     if (argv.mode === 'development') {
         config.devtool = 'source-map';
+        config.devServer = {
+            contentBase: dist,
+            compress: true,
+            historyApiFallback: true,
+            port: 9000,
+            disableHostCheck: true,
+            host: "0.0.0.0"
+        };
     }
 
     if (argv.mode === 'production') {

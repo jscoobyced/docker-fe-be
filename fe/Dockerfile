@@ -8,14 +8,14 @@ RUN set -ex; apt-get install -qqy --no-install-recommends \
         software-properties-common dirmngr python
 
 # Build application
-COPY fe fe
-RUN yarn --cwd fe install
-RUN yarn --cwd fe build
+COPY . .
+RUN yarn install
+RUN yarn build
 
 # Deploy
 FROM nginx:latest
 WORKDIR /build
 
-COPY --from=build-env /build/fe/dist /usr/share/nginx/html/
+COPY --from=build-env /build/dist /usr/share/nginx/html/
 EXPOSE 80 443
 

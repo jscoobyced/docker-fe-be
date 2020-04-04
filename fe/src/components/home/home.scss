@@ -1,5 +1,11 @@
-@import '../../styles/_variables';
+@import "../../styles/_variables";
 
-h1 {
-    color: $primary-dark;
+.container {
+    section {
+        padding: 5px;
+    }
+
+    pre {
+        width: 10%;
+    }
 }

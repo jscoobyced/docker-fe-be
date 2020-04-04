@@ -1,0 +1,9 @@
+{
+    "api": {
+        "port": 8080
+    },
+    "copyright": {
+        "year": 2020,
+        "author": "Cédric Rochefolle"
+    }
+}
