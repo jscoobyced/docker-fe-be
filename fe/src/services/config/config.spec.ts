@@ -5,6 +5,7 @@ describe('config service', () => {
     const application = Config.getApplicationConfig();
     expect(application.Port).not.toBeNull();
     expect(application.Port).not.toBeNaN();
+    expect(application.Server).not.toBeNull();
   });
 
   it('should contain copyright data', () => {

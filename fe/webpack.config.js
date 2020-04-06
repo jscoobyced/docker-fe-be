@@ -3,6 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+var webpack = require('webpack');
 
 const dist = path.join(__dirname, 'dist');
 
@@ -76,7 +77,10 @@ module.exports = (env, argv) => {
             }),
             new HtmlWebpackPlugin({
                 inject: true,
-            })
+            }),
+            new webpack.ProvidePlugin({
+                'regeneratorRuntime': 'regenerator-runtime/runtime'
+            }),
         ]
     };
 

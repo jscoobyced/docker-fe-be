@@ -1,7 +1,12 @@
 # Development directories
+# Front-End
 node_modules
 dist
 coverage
+
+# Back-End
+target
+.idea
 
 # Generated files
 yarn-error.log
