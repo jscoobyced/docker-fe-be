@@ -1,5 +1,6 @@
 FROM node:latest AS build-env
 WORKDIR /build
+ARG DEBIAN_FRONTEND=noninteractive
 
 ## Install dependencies packages
 RUN set -ex; apt-get -qqy update && apt-get -qqy upgrade
@@ -19,4 +20,3 @@ WORKDIR /build
 
 COPY --from=build-env /build/dist /usr/share/nginx/html/
 EXPOSE 80 443
-
