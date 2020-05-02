@@ -1,0 +1,19 @@
+{
+    "en_US": {
+        "SIGNIN": "Sign In",
+        "SIGNOUT": "Sign Out",
+        "LANGUAGE_EN": "English",
+        "LANGUAGE_FR": "Français",
+        "COPYRIGHT": "Copyright",
+        "COPYYEAR": "2020",
+        "COPYAUTHOR": "Cédric Rochefolle",
+        "WEBSITE_TITLE": "JSC FE BE",
+        "WEBSITE_SUBTITLE": "Dockerized template FE and BE web-application"
+    },
+    "fr_FR": {
+        "SIGNIN": "Connexion",
+        "SIGNOUT": "Deconnexion",
+        "COPYRIGHT": "Droits d'auteur",
+        "WEBSITE_SUBTITLE": "Modèle de base pour application web en docker."
+    }
+}
