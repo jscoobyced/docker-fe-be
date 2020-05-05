@@ -1,21 +1,15 @@
-import { DataService } from './data';
-import HttpService from '../http/http';
+import DataService from './data';
+import HttpServiceMock from '../http/http.mock';
 
-jest.mock('../http/http');
-
-beforeEach(() => {
-  (HttpService.fetchData as jest.Mock).mockReturnValue({});
-});
-
-const getDataService = (mockedValue: string): DataService => {
-  (HttpService.fetchData as jest.Mock).mockReturnValue(mockedValue);
-  const dataService = new DataService();
+const getDataService = (mockedValue: String): DataService => {
+  const httpService = new HttpServiceMock(mockedValue);
+  const dataService = new DataService(httpService);
   return dataService;
 };
 
 describe('data service', () => {
   const mockSuccessResponse = 'Hello, Scala!';
-  it('should return API data', async () => {
+  it('should return blog data', async () => {
     const result = await getDataService(mockSuccessResponse).getHelloScala();
     expect(result).toEqual(mockSuccessResponse);
   });

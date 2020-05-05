@@ -1,0 +1,44 @@
+@import "../../../styles/_variables";
+
+.container {
+    min-height: 89vh;
+    width: 100%;
+
+    section {
+        width: 75%;
+        min-height: 100%;
+        height: 100%;
+    }
+
+    aside {
+        vertical-align: top;
+        width: 25%;
+    }
+
+    section,
+    aside {
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: $media-width-medium) {
+    .container {
+        min-height: 87vh;
+        height: 87vh;
+
+        aside,
+        section {
+            width: 100%;
+        }
+
+        section {
+            height: 70%;
+            min-height: 70%;
+        }
+
+        aside {
+            height: 30%;
+            min-height: 30%;
+        }
+    }
+}
