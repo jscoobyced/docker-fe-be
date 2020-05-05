@@ -17,7 +17,7 @@ More details in Front-End [readme](./fe/README.md) file.
 
 ## Back-End
 
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jscdroiddev/narokio-be)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jscdroiddev/jscbe)
 
 The Back-End consists of an akka Scala API that runs in a docker container.
 
