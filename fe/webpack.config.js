@@ -69,7 +69,11 @@ module.exports = (env, argv) => {
         },
         plugins: [
             new CleanWebpackPlugin(),
-            new CopyWebpackPlugin([{
+            new webpack.DefinePlugin({
+                'process.env': {
+                    'mode': JSON.stringify(argv.mode)
+                }
+            }), new CopyWebpackPlugin([{
                 from: './public'
             }]),
             new MiniCssExtractPlugin({
@@ -97,6 +101,7 @@ module.exports = (env, argv) => {
     }
 
     if (argv.mode === 'production') {
+        // placeholder for future enhancements
     }
 
     return config;

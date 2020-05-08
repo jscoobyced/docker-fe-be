@@ -1,0 +1,21 @@
+version: '3'
+services:
+  jscfe:
+    build:
+      context: ./fe
+      dockerfile: Dockerfile
+      args:
+        - JSCCURRENT=.
+        - JSCMODE=none
+    image: jscdroiddev/jscfe
+    ports:
+      - "8080:80"
+  jscbe:
+    build:
+      context: ./be
+      dockerfile: Dockerfile
+      args:
+        - JSCCURRENT=.
+    image: jscdroiddev/jscbe
+    ports:
+      - "9001:9001"

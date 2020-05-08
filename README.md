@@ -7,6 +7,17 @@ This project is a skeleton to create a full-stack web-application.
 
 This is a full-stack application built from the [jsc-fe-be](https://github.com/jscoobyced/jsc-fe-be) github template.
 
+## Quick Start
+
+You can run `docker-compose` to start the application:
+```
+docker-compose up -d
+```
+This will pull the image from docker repository. If you want to run a local build:
+```
+docker-compose -f docker-compose-dev.yml up --build -d
+```
+
 ## Front-End
 
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/jscdroiddev/jscfe)

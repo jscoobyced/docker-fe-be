@@ -6,15 +6,16 @@ import './SampleContent.scss';
 export const SampleContent = () => {
   const [hello, setHello] = React.useState('Nothing...');
   const { dataService } = React.useContext(AppContext);
-  const server = getApplicationConfig().Server;
-  const port = getApplicationConfig().Port;
+  const mode = process.env.mode as string;
+  const server = getApplicationConfig(mode).Server;
+  const port = getApplicationConfig(mode).Port;
 
   React.useEffect(() => {
     dataService.getHelloScala()
       .then((data) => {
         setHello(data.hello);
       });
-  });
+  }, []);
 
   return (
     <article>

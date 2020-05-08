@@ -1,6 +1,5 @@
 FROM node:latest AS build-env
 WORKDIR /build
-ARG DEBIAN_FRONTEND=noninteractive
 
 ## Install dependencies packages
 RUN set -ex; apt-get -qqy update && apt-get -qqy upgrade
@@ -10,9 +9,10 @@ RUN set -ex; apt-get install -qqy --no-install-recommends \
 
 # Build application
 ARG JSCCURRENT="./fe"
+ARG JSCMODE="prod"
 COPY ${JSCCURRENT} .
 RUN yarn install
-RUN yarn build
+RUN /bin/bash -c 'yarn build:${JSCMODE}'
 
 # Deploy
 FROM nginx:latest
