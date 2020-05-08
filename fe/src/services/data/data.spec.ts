@@ -9,7 +9,7 @@ const getDataService = (mode: string, mockedValue: string): DataService => {
 
 describe('data service', () => {
   const modes = ['development', 'production'];
-  modes.map(mode => {
+  modes.forEach(mode => {
     const mockSuccessResponse = 'Hello, Scala!';
     it('should return hello scala', async () => {
       const result = await getDataService(mode, mockSuccessResponse).getHelloScala();

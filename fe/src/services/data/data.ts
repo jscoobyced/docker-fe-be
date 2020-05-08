@@ -25,9 +25,9 @@ export default class DataService {
 
   public getHelloScalaWithParameters = async (): Promise<HelloMessage> => {
     const parameters = {
-      name: "page",
-      value: 0
-    }
+      name: 'page',
+      value: 0,
+    };
     return this.get('hello', [parameters]);
   }
 
