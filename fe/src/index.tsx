@@ -10,7 +10,7 @@ let httpService;
 
 const mode = process.env.mode as string;
 if (mode === 'development') {
-  httpService = new HttpServiceMock({ hello: "Hello, Scala!" });
+  httpService = new HttpServiceMock([{ value: "Hello, Scala!" }]);
 } else {
   httpService = new HttpService();
 }

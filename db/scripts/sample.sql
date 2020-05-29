@@ -1,0 +1,5 @@
+USE `jscdb`;
+
+LOCK TABLES `sample` WRITE;
+INSERT INTO `sample` VALUES (1,'Hello, Scala!','2020-05-10 17:37:24','2020-05-10 17:37:24', 0);
+UNLOCK TABLES;

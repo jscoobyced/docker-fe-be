@@ -1,4 +1,4 @@
-import com.typesafe.sbt.packager.docker.{Cmd, ExecCmd}
+import Version._
 
 enablePlugins(JavaAppPackaging)
 
@@ -10,11 +10,15 @@ maintainer := "Cédric Rochefolle"
 scalacOptions := Seq("-unchecked", "-deprecation", "-encoding", "utf8")
 
 libraryDependencies ++= {
-  val akkaV = "2.6.4"
-  val akkaHttpV = "10.1.11"
+
   Seq(
-    "com.typesafe.akka" %% "akka-stream" % akkaV,
-    "com.typesafe.akka" %% "akka-http" % akkaHttpV,
-    "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpV
+    "com.typesafe.akka" %% "akka-stream"          % akkaVersion,
+    "com.typesafe.akka" %% "akka-http"            % akkaHttpVersion,
+    "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
+    "net.codingwell"    %% "scala-guice"          % guiceVersion,
+    "mysql"             % "mysql-connector-java"  % mysqlVersion
   )
 }
+wartremoverErrors ++= Warts.unsafe
+
+fork in run := true
