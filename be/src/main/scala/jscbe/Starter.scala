@@ -8,7 +8,7 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.directives.RouteDirectives
 import com.google.inject.Inject
 import jscbe.configuration.RawConfiguration
-import jscbe.repositories.SqlConnectionCreator
+import jscbe.repositories.db.SqlConnectionCreator
 import jscbe.routes.WebRoute
 
 import scala.concurrent.{ExecutionContext, Future}

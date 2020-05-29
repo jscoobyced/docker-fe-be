@@ -2,7 +2,7 @@ package jscbe.services.sample
 
 import com.google.inject.Inject
 import jscbe.models.http.sample.Sample
-import jscbe.repositories.DatabaseRepository
+import jscbe.repositories.db.DatabaseRepository
 import jscbe.routes.JsonSupport
 
 import scala.concurrent.ExecutionContext
@@ -19,7 +19,7 @@ class SampleServiceImpl @Inject()(private val databaseRepository: DatabaseReposi
     with JsonSupport {
   val database = new SampleDatabase(databaseRepository)
 
-  override def getSampleList: List[Sample] = database.getSampleList()
+  override def getSampleList: List[Sample] = database.getSampleList
 
   override def saveSample(sample: Sample): Int = database.saveSample(sample)
 
