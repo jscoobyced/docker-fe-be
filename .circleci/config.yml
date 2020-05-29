@@ -1,7 +1,7 @@
 version: 2
 jobs:
   typescript_test:
-    working_directory: ~/narok
+    working_directory: ~/jscfebe
     docker:
       - image: jscdroiddev/jsc-dev-tools:latest
     steps:
@@ -16,7 +16,7 @@ jobs:
           name: codecov
           command: codecov -y ./codecov.yml -f ./fe/coverage/coverage-final.json -F react
   typescript:
-    working_directory: ~/narok
+    working_directory: ~/jscfebe
     docker:
       - image: circleci/node:latest
     steps:
@@ -28,7 +28,7 @@ jobs:
           name: build
           command: yarn --cwd fe build:prod --silent --no-progress
   release:
-    working_directory: ~/narok
+    working_directory: ~/jscfebe
     docker:
       - image: jscdroiddev/jsc-dev-tools:latest
     steps:
@@ -36,7 +36,7 @@ jobs:
       - run:
           name: git-release
           command: |
-            ./.circleci/git-release.sh "Latest release of https://narok.io."
+            ./.circleci/git-release.sh "Latest release of jsc-fe-be."
 workflows:
   version: 2
   do_it_all:

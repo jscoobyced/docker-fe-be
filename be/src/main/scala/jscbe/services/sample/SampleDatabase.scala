@@ -11,7 +11,7 @@ class SampleDatabase @Inject()(databaseRepository: DatabaseRepository) {
   private val getSampleListSql: String = "SELECT id, value, created, modified FROM sample " +
     "WHERE status = 0 ORDER BY created DESC, modified DESC LIMIT 5"
   private val insertSampleSql = "INSERT INTO sample (value, created, modified, status) VALUES (?, ?, ?, 0)"
-  private val updateSampleSql = "UPDATE sample SET value = ?, modified = ? WHERE blog_id = ?"
+  private val updateSampleSql = "UPDATE sample SET value = ?, modified = ? WHERE id = ?"
 
   def getSampleList(): List[Sample] =
     databaseRepository
