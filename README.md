@@ -12,11 +12,20 @@ This is a full-stack application built from the [jsc-fe-be](https://github.com/j
 You can run `docker-compose` to start the application:
 ```
 docker-compose up -d
+docker exec -i docker-fe-be_jscdb_1 sh -c 'exec mysql -ujscdb -pjscdb' < ./db/scripts/create.sql
+docker exec -i docker-fe-be_jscdb_1 sh -c 'exec mysql -ujscdb -pjscdb' < ./db/scripts/sample.sql
 ```
+Note you might need to change the name `docker-fe-be_jscdb_1` in last 2 commands if you change the docker-compose image names.
+
 This will pull the image from docker repository. If you want to run a local build:
 ```
 docker-compose -f docker-compose-dev.yml up --build -d
+docker exec -i docker-fe-be_jscdb_1 sh -c 'exec mysql -ujscdb -pjscdb' < ./db/scripts/create.sql
+docker exec -i docker-fe-be_jscdb_1 sh -c 'exec mysql -ujscdb -pjscdb' < ./db/scripts/sample.sql
 ```
+Note you might need to change the name `docker-fe-be_jscdb_1` in last 2 commands if you change the docker-compose image names.
+
+Then open a browser on [http://locahost:8080](http://locahost:8080)
 
 ## Front-End
 

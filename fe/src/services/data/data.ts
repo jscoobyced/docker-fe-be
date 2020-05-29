@@ -7,8 +7,11 @@ interface Parameter {
   value: string | number;
 }
 
-interface HelloMessage {
-  hello: string
+export interface HelloMessage {
+  id: number;
+  value: string;
+  created: string;
+  modified: string;
 }
 
 export default class DataService {
@@ -21,9 +24,9 @@ export default class DataService {
     this.httpService = httpService;
   }
 
-  public getHelloScala = async (): Promise<HelloMessage> => this.get('hello')
+  public getHelloScala = async (): Promise<Array<HelloMessage>> => this.get('hello')
 
-  public getHelloScalaWithParameters = async (): Promise<HelloMessage> => {
+  public getHelloScalaWithParameters = async (): Promise<Array<HelloMessage>> => {
     const parameters = {
       name: 'page',
       value: 0,

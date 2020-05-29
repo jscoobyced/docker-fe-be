@@ -8,6 +8,13 @@ coverage
 target
 .idea
 
+# DB
+db/data
+
+# Configuration
+*/conf/
+conf
+
 # Generated files
 yarn-error.log
 /*.zip

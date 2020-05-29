@@ -1,4 +1,4 @@
-version: '3'
+version: "3"
 services:
   jscfe:
     build:
@@ -10,6 +10,8 @@ services:
     image: jscdroiddev/jscfe
     ports:
       - "8080:80"
+    depends_on:
+      - jscbe
   jscbe:
     build:
       context: ./be
@@ -19,3 +21,19 @@ services:
     image: jscdroiddev/jscbe
     ports:
       - "9001:9001"
+    depends_on:
+      - jscdb
+    volumes:
+      - "./conf:/opt/jscbe/conf"
+  jscdb:
+    image: mariadb:latest
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: jscdb
+      MYSQL_USER: jscdb
+      MYSQL_PASSWORD: jscdb
+    volumes:
+      - "./db/data:/var/lib/mysql"
+    ports:
+      - "3306:3306"
