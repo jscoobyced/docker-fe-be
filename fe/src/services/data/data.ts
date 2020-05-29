@@ -7,7 +7,7 @@ interface Parameter {
   value: string | number;
 }
 
-interface HelloMessage {
+export interface HelloMessage {
   id: number;
   value: string;
   created: string;

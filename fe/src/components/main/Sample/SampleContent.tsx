@@ -13,8 +13,8 @@ export const SampleContent = () => {
   React.useEffect(() => {
     dataService.getHelloScala()
       .then((data) => {
-        if(!data || data.length == 0) setHello('Nothing found...')
-        setHello(data[0].value);
+        if (!data || data.length === 0) setHello('Nothing found...');
+        else setHello(data[0].value);
       });
   }, []);
 
