@@ -4,7 +4,7 @@ import akka.http.scaladsl.model.headers.RawHeader
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import com.google.inject.Inject
-import jscbe.configuration.RawConfiguration
+import jscbe.configuration.HttpConfigurationImpl
 import jscbe.models.http.sample.Sample
 import jscbe.models.http.{FailResponse, ResponseData, SuccessResponse}
 import jscbe.services.sample.SampleService
@@ -12,16 +12,15 @@ import jscbe.services.sample.SampleService
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success, Try}
 
-class SampleRoute @Inject()(implicit executionContext: ExecutionContext,
-                            private val sampleService: SampleService,
-                            private val rawConfiguration: RawConfiguration)
+class SampleRoute @Inject()(implicit executionContext: ExecutionContext, private val sampleService: SampleService)
     extends BaseRoute {
   override protected def routes: Route = sampleRoutes
 
+  val origin: String = HttpConfigurationImpl.getOrigin
   def sampleRoutes: Route = concat(
     path("hello") {
       get {
-        respondWithHeaders(RawHeader("Access-Control-Allow-Origin", rawConfiguration.config.getString("http.origin"))) {
+        respondWithHeaders(RawHeader("Access-Control-Allow-Origin", origin)) {
           val hello =
             if (sampleService.getSampleList.nonEmpty) sampleService.getSampleList
             else List(Sample(-1, "No result found.", "", ""))
@@ -34,8 +33,7 @@ class SampleRoute @Inject()(implicit executionContext: ExecutionContext,
         post {
           decodeRequest {
             entity(as[Sample]) { sample =>
-              respondWithHeaders(
-                RawHeader("Access-Control-Allow-Origin", rawConfiguration.config.getString("http.origin"))) {
+              respondWithHeaders(RawHeader("Access-Control-Allow-Origin", origin)) {
                 val insertedId = sampleService.saveSample(sample)
                 if (insertedId > 0)
                   complete(SuccessResponse(ResponseData("Sample saved successfully", insertedId)))
@@ -51,8 +49,7 @@ class SampleRoute @Inject()(implicit executionContext: ExecutionContext,
               decodeRequest {
                 entity(as[Sample]) {
                   sample =>
-                    respondWithHeaders(
-                      RawHeader("Access-Control-Allow-Origin", rawConfiguration.config.getString("http.origin"))) {
+                    respondWithHeaders(RawHeader("Access-Control-Allow-Origin", origin)) {
                       Try(id.toInt) match {
                         case Success(sampleId) =>
                           val result = sampleService.updateSample(sampleId, sample)
