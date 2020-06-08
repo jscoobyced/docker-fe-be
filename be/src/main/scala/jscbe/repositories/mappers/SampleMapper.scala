@@ -6,6 +6,7 @@ import jscbe.models.http.sample.Sample
 
 object SampleMapper extends AbstractMapper {
 
+  // $COVERAGE-OFF$
   def toSample(resultSet: ResultSet): List[Sample] = {
     val sampleIterator = resultSetIterator(resultSet)
     val helloList = sampleIterator.map(result => {
@@ -18,5 +19,5 @@ object SampleMapper extends AbstractMapper {
     })
     helloList.toList
   }
-
+  // $COVERAGE-ON$
 }

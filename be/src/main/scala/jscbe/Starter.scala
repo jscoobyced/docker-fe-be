@@ -7,27 +7,23 @@ import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.server.directives.RouteDirectives
 import com.google.inject.Inject
-import jscbe.configuration.RawConfiguration
-import jscbe.repositories.db.SqlConnectionCreator
+import jscbe.configuration.HttpConfiguration
 import jscbe.routes.WebRoute
 
 import scala.concurrent.{ExecutionContext, Future}
 import scala.util.{Failure, Success}
 
-class Starter @Inject()(private val sqlConnectionCreator: SqlConnectionCreator,
-                        private val routes: Set[WebRoute],
-                        private val rawConfiguration: RawConfiguration)(
+class Starter @Inject()(private val routes: Set[WebRoute], private val httpConnection: HttpConfiguration)(
     implicit actorSystem: ActorSystem,
     executionContext: ExecutionContext
 ) {
 
   def start(): Future[ServerBinding] = {
-    sqlConnectionCreator.getConnection
     val binding = Http()
       .bindAndHandle(
         handler = routes.map(_.route).foldLeft[Route](RouteDirectives.reject)(_ ~ _),
-        interface = rawConfiguration.config.getString("http.interface"),
-        port = rawConfiguration.config.getInt("http.port")
+        interface = httpConnection.getInterface,
+        port = httpConnection.getPort
       )
     binding
       .onComplete {
