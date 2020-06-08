@@ -2,6 +2,7 @@ package jscbe.repositories.mappers
 
 import java.sql.ResultSet
 
+// $COVERAGE-OFF$
 abstract class AbstractMapper {
   def resultSetIterator(resultSet: ResultSet): Iterator[ResultSet] =
     new Iterator[ResultSet] {
@@ -10,3 +11,4 @@ abstract class AbstractMapper {
       def next(): ResultSet = resultSet
     }
 }
+// $COVERAGE-ON$

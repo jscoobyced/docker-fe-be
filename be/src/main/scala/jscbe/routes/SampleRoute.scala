@@ -16,6 +16,7 @@ class SampleRoute @Inject()(implicit executionContext: ExecutionContext, private
     extends BaseRoute {
   override protected def routes: Route = sampleRoutes
 
+  // $COVERAGE-OFF$
   val origin: String = HttpConfigurationImpl.getOrigin
   def sampleRoutes: Route = concat(
     path("hello") {
@@ -66,4 +67,5 @@ class SampleRoute @Inject()(implicit executionContext: ExecutionContext, private
         }
     }
   )
+  // $COVERAGE-ON$
 }
