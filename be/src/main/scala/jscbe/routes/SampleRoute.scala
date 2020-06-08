@@ -12,11 +12,11 @@ import jscbe.services.sample.SampleService
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success, Try}
 
+// $COVERAGE-OFF$
 class SampleRoute @Inject()(implicit executionContext: ExecutionContext, private val sampleService: SampleService)
     extends BaseRoute {
   override protected def routes: Route = sampleRoutes
 
-  // $COVERAGE-OFF$
   val origin: String = HttpConfigurationImpl.getOrigin
   def sampleRoutes: Route = concat(
     path("hello") {
@@ -67,5 +67,5 @@ class SampleRoute @Inject()(implicit executionContext: ExecutionContext, private
         }
     }
   )
-  // $COVERAGE-ON$
 }
+// $COVERAGE-ON$
